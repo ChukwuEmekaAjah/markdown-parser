@@ -1,72 +1,72 @@
 package md
 
-import (
-	"fmt"
-	"strings"
-)
+// import (
+// 	"fmt"
+// 	"strings"
+// )
 
-var isDefinition bool = false
+// var isDefinition bool = false
 
-var lines []string = []string{
-	" Hello cutie",
-	" Hello world ",
-	"  : I am a bad ass",
-	"Hi world",
-	": Are you a bad ass",
-	": Yes I am",
-	"Hello girls",
-	": I am smart",
-	"## ahelo",
-	"Hello cutie",
-	"Hello world ",
-	": I am a bad ass",
-	"Hi world",
-	": Are you a bad ass",
-	": Yes I am",
-	"Hello girls",
-	": I am smart",
-	"## ahelo",
-}
+// var lines []string = []string{
+// 	" Hello cutie",
+// 	" Hello world ",
+// 	"  : I am a bad ass",
+// 	"Hi world",
+// 	": Are you a bad ass",
+// 	": Yes I am",
+// 	"Hello girls",
+// 	": I am smart",
+// 	"## ahelo",
+// 	"Hello cutie",
+// 	"Hello world ",
+// 	": I am a bad ass",
+// 	"Hi world",
+// 	": Are you a bad ass",
+// 	": Yes I am",
+// 	"Hello girls",
+// 	": I am smart",
+// 	"## ahelo",
+// }
 
-func main() {
-	recurseString(lines)
-}
+// func main() {
+// 	recurseString(lines)
+// }
 
-func recurseString(lines []string) []string {
-	for i, line := range lines {
+// func recurseString(lines []string) []string {
+// 	for i, line := range lines {
 
-		if string(strings.Trim(line, " ")[0]) == string(":") {
-			// cater for possibility of it being a start text
-			if !isDefinition && string(strings.Trim(lines[i-1], " ")[0]) != string(":") {
-				isDefinition = true
-				lines[i-1] = fmt.Sprintf("<dl><dt>%s</dt>", lines[i-1]) // first definition line
-			} else if isDefinition && string(strings.Trim(lines[i-1], " ")[0]) != string(":") && string(strings.Trim(lines[i-1], " ")[0]) != "<" { // definition term
-				lines[i-1] = fmt.Sprintf("<dt>%s</dt>", lines[i-1]) // first definition line
-			}
+// 		if string(strings.Trim(line, " ")[0]) == string(":") {
+// 			// cater for possibility of it being a start text
+// 			if !isDefinition && string(strings.Trim(lines[i-1], " ")[0]) != string(":") {
+// 				isDefinition = true
+// 				lines[i-1] = fmt.Sprintf("<dl><dt>%s</dt>", lines[i-1]) // first definition line
+// 			} else if isDefinition && string(strings.Trim(lines[i-1], " ")[0]) != string(":") && string(strings.Trim(lines[i-1], " ")[0]) != "<" { // definition term
+// 				lines[i-1] = fmt.Sprintf("<dt>%s</dt>", lines[i-1]) // first definition line
+// 			}
 
-			if isDefinition && string(strings.Trim(lines[i], " ")[0]) == string(":") {
-				lines[i] = fmt.Sprintf("<dd>%s</dd>", strings.Trim(line, " ")[1:]) // first definition line
-			}
-		} else {
-			if i-1 < 0 {
-				continue
-			}
-			if string(strings.Trim(lines[i-1], " ")[0]) != string("<") && isDefinition {
-				isDefinition = false
-				lines[i-2] += "</dl>" //last line for this batch of definition list
+// 			if isDefinition && string(strings.Trim(lines[i], " ")[0]) == string(":") {
+// 				lines[i] = fmt.Sprintf("<dd>%s</dd>", strings.Trim(line, " ")[1:]) // first definition line
+// 			}
+// 		} else {
+// 			if i-1 < 0 {
+// 				continue
+// 			}
+// 			if string(strings.Trim(lines[i-1], " ")[0]) != string("<") && isDefinition {
+// 				isDefinition = false
+// 				lines[i-2] += "</dl>" //last line for this batch of definition list
 
-			}
-		}
+// 			}
+// 		}
 
-		//fmt.Println("line is", lines[i])
-	}
+// 		//fmt.Println("line is", lines[i])
+// 	}
 
-	fmt.Println("lines are", lines)
+// 	fmt.Println("lines are", lines)
 
-	//fmt.Println("results are", lines)
+// 	//fmt.Println("results are", lines)
 
-	return lines
-}
+// 	return lines
+// }
 
 // func recurseString(lines []string) []string {
 // 	results := make([]string, 0)
